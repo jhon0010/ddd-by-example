@@ -1,0 +1,14 @@
+plugins {
+	id 'groovy' // automatically apply the java plugin you can delete id 'java'
+	id 'application' // make a java application
+}
+
+mainClassName = 'com.test.java.features.main.Main'
+
+dependencies {
+
+//	implementation 'org.immutables:value:2.8.2'
+	compileOnly 'org.immutables:value:2.8.2'
+	annotationProcessor 'org.immutables:value:2.8.2'
+
+}
