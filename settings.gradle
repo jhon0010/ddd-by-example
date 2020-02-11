@@ -1,3 +1,19 @@
 rootProject.name = 'ddd-by-example'
 
-include 'application'
+
+// -- Including sub projects like bounded context
+
+/**
+ *  TODO:  Defining explicit bounded context with explicit location of specific build.gradle
+ * include ':shared'
+ * project(':shared').projectDir = new File('src/shared')
+ */
+
+include ':shared'
+project(':shared').projectDir = new File('src/shared')
+
+include ':backoffice'
+project(':backoffice').projectDir = new File('src/backoffice')
+
+include ':mooc'
+project(':mooc').projectDir = new File('src/mooc')
