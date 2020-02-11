@@ -129,7 +129,7 @@ bootJar {
     version = '0.0.1'
 }
 
-mainClassName = 'com.ddd.video.example.Starter'
+mainClassName = 'com.ddd.video.example.apps.Starter'
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.1.8.RELEASE'
