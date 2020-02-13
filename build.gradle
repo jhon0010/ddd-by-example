@@ -24,6 +24,12 @@ allprojects { // apply yo this project and all sub projects
         set('elasticsearch.version', '6.8.4')
     }
 
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+    }
 
     dependencies {
 
@@ -32,10 +38,11 @@ allprojects { // apply yo this project and all sub projects
         implementation 'com.vlkan.log4j2:log4j2-logstash-layout:0.21'
 
         // Test
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
         testImplementation 'org.mockito:mockito-core:2.+'
         testImplementation 'com.github.javafaker:javafaker:1.0.1'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+
+        testCompile 'org.junit.jupiter:junit-jupiter-api:5.3.2'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.2'
     }
 
     dependencyManagement {
@@ -129,7 +136,7 @@ bootJar {
     version = '0.0.1'
 }
 
-mainClassName = 'com.ddd.video.example.Starter'
+mainClassName = 'com.ddd.video.example.apps.Starter'
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.1.8.RELEASE'
@@ -142,5 +149,6 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.1.8.RELEASE'
     testImplementation project(":shared").sourceSets.test.output
-}
 
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
