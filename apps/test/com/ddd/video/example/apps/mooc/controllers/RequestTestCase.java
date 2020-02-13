@@ -1,9 +1,13 @@
 package com.ddd.video.example.apps.mooc.controllers;
 
+import ch.qos.logback.core.util.ContentTypeUtil;
+import jdk.jfr.ContentType;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnNotWebApplication;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -51,6 +55,13 @@ public abstract class RequestTestCase {
     public void putRequest(String endpoint, Integer expectedStatusCode) throws Exception {
         mockMvc
                 .perform(put(endpoint))
+                .andExpect(status().is(expectedStatusCode))
+                .andExpect(content().string(""));
+    }
+
+    public void putRequest(String endpoint, String body, Integer expectedStatusCode) throws Exception {
+        mockMvc
+                .perform(put(endpoint).content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(expectedStatusCode))
                 .andExpect(content().string(""));
     }

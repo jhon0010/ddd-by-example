@@ -12,9 +12,11 @@ import java.util.Arrays;
 /**
  * {@link SpringBootApplication} = LOad all spring boot context and libraries
  * {@link ComponentScan} = Allow the dependency injection , in the package and recognize the components of spring.
+ *
+ * With the ComponentScan you can make injection of this classes latter.
  */
 @SpringBootApplication
-@ComponentScan({"com.ddd.video.example.apps","com.ddd.video.example.mooc","com.ddd.video.example.backoffice"})
+@ComponentScan({"com.ddd.video.example.apps","com.ddd.video.example.apps.mooc","com.ddd.video.example.apps..backoffice"})
 public class Starter {
 
     public static void main(String[] args) {
