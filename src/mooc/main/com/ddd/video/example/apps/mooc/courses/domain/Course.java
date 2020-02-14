@@ -4,49 +4,37 @@ import java.util.Objects;
 
 public class Course {
 
-    private String id;
-    private String name;
-    private String duration;
+    private CourseId id;
+    private CourseName name;
+    private CourseDurantion duration;
 
-    public Course(String id, String name, String duration) {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
+    public Course(CourseId id, CourseName name, CourseDurantion duration) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Course course = (Course) o;
-        return Objects.equals(getId(), course.getId()) &&
-                Objects.equals(getName(), course.getName()) &&
-                Objects.equals(getDuration(), course.getDuration());
+    public CourseId getId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getDuration());
+    public void setId(CourseId id) {
+        this.id = id;
+    }
+
+    public CourseName getName() {
+        return name;
+    }
+
+    public void setName(CourseName name) {
+        this.name = name;
+    }
+
+    public CourseDurantion getDuration() {
+        return duration;
+    }
+
+    public void setDuration(CourseDurantion duration) {
+        this.duration = duration;
     }
 }

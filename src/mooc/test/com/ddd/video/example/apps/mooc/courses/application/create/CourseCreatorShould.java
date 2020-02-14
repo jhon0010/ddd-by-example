@@ -1,7 +1,11 @@
 package com.ddd.video.example.apps.mooc.courses.application.create;
 
 import com.ddd.video.example.apps.mooc.courses.domain.Course;
+import com.ddd.video.example.apps.mooc.courses.domain.CreateCourseRequest;
+import com.ddd.video.example.apps.mooc.courses.domain.CourseMother;
 import com.ddd.video.example.apps.mooc.courses.domain.CourseRepository;
+import com.ddd.video.example.apps.mooc.courses.domain.CreateCourseRequestMother;
+import com.ddd.video.example.apps.mooc.courses.infraestructure.InMemoryRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
@@ -17,10 +21,10 @@ final class CourseCreatorShould {
     @Test
     void create() {
 
-        CourseRepository courseRepository = Mockito.mock(CourseRepository.class); // Injected mock instance
+        CourseRepository courseRepository = Mockito.mock(InMemoryRepository.class); // Injected mock instance
         CourseCreator creator = new CourseCreator(courseRepository);
-        Course course = new Course("1","the", "5 hours");
-        creator.create(course.getId(), course.getName(), course.getDuration());
-        verify(courseRepository, atLeastOnce()).save(course); // Verifying the call of repository method, the method have to have the same object (override toString and hashCode())
+        CreateCourseRequest createCourseRequest = CreateCourseRequestMother.random();
+        creator.create(createCourseRequest);
+        verify(courseRepository, atLeastOnce()).save(any()); // Verifying the call of repository method, the method have to have the same object (override toString and hashCode())
     }
 }

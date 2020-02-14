@@ -1,6 +1,7 @@
 package com.ddd.video.example.apps.mooc.courses.infraestructure;
 
 import com.ddd.video.example.apps.mooc.courses.domain.Course;
+import com.ddd.video.example.apps.mooc.courses.domain.CourseId;
 import com.ddd.video.example.apps.mooc.courses.domain.CourseRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,7 @@ import java.util.Optional;
 @Repository
 public class InMemoryRepository implements CourseRepository{
 
-    HashMap<String, Course> courses = new HashMap<>();
+    HashMap<CourseId, Course> courses = new HashMap<>();
 
     @Override
     public void save(Course course) {
@@ -28,7 +29,7 @@ public class InMemoryRepository implements CourseRepository{
 
     @Override
     public Optional<Course> get(String id) {
-        return Optional.ofNullable(this.courses.get(id));
+        return Optional.ofNullable(this.courses.get(new CourseId(id)));
     }
 
     @Override
