@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ddd.video.example.apps.mooc.courses.infraestructure.InMemoryRepositoryShould" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-02-14T19:07:41" hostname="jhon-pc" time="0.255">
+  <properties/>
+  <testcase name="delete()" classname="com.ddd.video.example.apps.mooc.courses.infraestructure.InMemoryRepositoryShould" time="0.136"/>
+  <testcase name="get()" classname="com.ddd.video.example.apps.mooc.courses.infraestructure.InMemoryRepositoryShould" time="0.045"/>
+  <testcase name="save()" classname="com.ddd.video.example.apps.mooc.courses.infraestructure.InMemoryRepositoryShould" time="0.036"/>
+  <testcase name="getFailed()" classname="com.ddd.video.example.apps.mooc.courses.infraestructure.InMemoryRepositoryShould" time="0.036"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

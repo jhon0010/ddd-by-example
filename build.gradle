@@ -96,6 +96,7 @@ subprojects {
         }
     }
 
+
     bootJar { // in the sub projects do not generate the spring boot jar , only a plain jar
         enabled = false
     }

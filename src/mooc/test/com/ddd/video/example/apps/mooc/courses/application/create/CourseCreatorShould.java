@@ -1,5 +1,6 @@
 package com.ddd.video.example.apps.mooc.courses.application.create;
 
+import com.ddd.video.example.apps.mooc.courses.CoursesModuleUnitTestCase;
 import com.ddd.video.example.apps.mooc.courses.domain.Course;
 import com.ddd.video.example.apps.mooc.courses.domain.CreateCourseRequest;
 import com.ddd.video.example.apps.mooc.courses.domain.CourseMother;
@@ -11,7 +12,7 @@ import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 
 
-final class CourseCreatorShould {
+final class CourseCreatorShould extends CoursesModuleUnitTestCase {
 
     /**
      * Test in calling methods and pass messages.
