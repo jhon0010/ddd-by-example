@@ -1,0 +1,31 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!--  access="field"  is for reference the field in the class composite id and use reflection  and avoid the getters and setters  -->
+<!--
+        composite-id  we use composite-id for allow us to get the value objects as ids instance to join two  fields
+        this allow to us to have better focus in our model over our infrastructure decisions in infrastructure layer
+-->
+
+<!-- component  = is the same that embedded in annotation type  -->
+
+
+<!-- If you change the name of attributes must to change ir here too -->
+
+<hibernate-mapping>
+    <class name="com.ddd.mooc.courses.domain.Course" table="courses">
+        <composite-id name="id" class="com.ddd.mooc.courses.domain.CourseId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+
+        <component name="name" class="com.ddd.mooc.courses.domain.CourseName" access="field">
+            <property name="value" column="name" type="string" access="field" />
+        </component>
+
+        <component name="duration" class="com.ddd.mooc.courses.domain.CourseDuration" access="field">
+            <property name="value" column="duration" type="string" access="field" />
+        </component>
+    </class>
+</hibernate-mapping>
