@@ -1,4 +1,4 @@
-package com.ddd.video.example.apps.mooc.courses.infraestructure;
+package com.ddd.video.example.apps.mooc.courses.infraestructure.persistence;
 
 import com.ddd.video.example.apps.mooc.courses.domain.Course;
 import com.ddd.video.example.apps.mooc.courses.domain.CourseId;
@@ -17,7 +17,6 @@ import java.util.Optional;
  *
  *  The name of this class indicate this behaviour.
  */
-@Repository
 public class InMemoryRepository implements CourseRepository{
 
     HashMap<CourseId, Course> courses = new HashMap<>();

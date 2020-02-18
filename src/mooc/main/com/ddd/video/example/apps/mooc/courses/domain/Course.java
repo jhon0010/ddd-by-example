@@ -1,7 +1,5 @@
 package com.ddd.video.example.apps.mooc.courses.domain;
 
-import java.util.Objects;
-
 public class Course {
 
     private CourseId id;

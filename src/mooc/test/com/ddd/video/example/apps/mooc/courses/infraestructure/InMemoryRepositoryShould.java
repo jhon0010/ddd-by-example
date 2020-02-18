@@ -1,12 +1,10 @@
 package com.ddd.video.example.apps.mooc.courses.infraestructure;
 
 import com.ddd.video.example.apps.mooc.courses.domain.Course;
-import com.ddd.video.example.apps.mooc.courses.domain.CourseDurantion;
-import com.ddd.video.example.apps.mooc.courses.domain.CourseId;
 
 import com.ddd.video.example.apps.mooc.courses.domain.CourseMother;
-import com.ddd.video.example.apps.mooc.courses.domain.CourseNameMother;
 import com.ddd.video.example.apps.mooc.courses.domain.CourseRepository;
+import com.ddd.video.example.apps.mooc.courses.infraestructure.persistence.InMemoryRepository;
 import com.ddd.video.example.apps.shared.domain.WordMother;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;

@@ -90,6 +90,17 @@ subprojects {
         testImplementation rootProject.sourceSets.main.output
         testImplementation 'org.springframework.boot:spring-boot-starter-test:2.2.1.RELEASE'
 
+        // HIBERNATE DEPENDENCY
+        compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.12.Final'
+        compile group: 'org.springframework', name: 'spring-orm', version: '5.2.3.RELEASE' //Spring native integration
+        compile group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '9.0.30' // for avoid the default configuration of spring for jdbc connections
+
+        //Read xml files
+        compile group: 'javax.xml', name: 'jaxb-api', version: '2.1'
+        compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.4.0-b180830.0438'
+
+
+
         if (project.name != "shared") {
             implementation project(":shared")
             testImplementation project(":shared").sourceSets.test.output

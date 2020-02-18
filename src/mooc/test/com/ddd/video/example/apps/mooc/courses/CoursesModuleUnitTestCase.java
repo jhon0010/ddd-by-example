@@ -2,8 +2,8 @@ package com.ddd.video.example.apps.mooc.courses;
 
 import com.ddd.video.example.apps.mooc.courses.domain.Course;
 import com.ddd.video.example.apps.mooc.courses.domain.CourseRepository;
+import com.ddd.video.example.apps.mooc.courses.infraestructure.persistence.MySqlCourseRepository;
 import com.ddd.video.example.apps.shared.UnitTestCase;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.*;
 
@@ -21,12 +21,12 @@ public class CoursesModuleUnitTestCase extends UnitTestCase {
      */
     @BeforeEach
     protected void setUp() {
-        courseRepository = mock(CourseRepository.class);
+        courseRepository = mock(MySqlCourseRepository.class);
     }
 
-    @Test
-    protected void shouldHaveSaved(Course course) {
-        verify(courseRepository, atLeastOnce()).save(course);
+
+    public void shouldHaveSaved() {
+        verify(courseRepository, atLeastOnce()).save(any());
     }
 
 }
