@@ -1,50 +1,90 @@
 package com.ddd.apps;
 
-import com.ddd.apps.shared.domain.Service;
-import com.ddd.mooc.shared.infraestructure.persistence.hibernate.MoocHibernateConfiguration;
-import org.springframework.boot.CommandLineRunner;
+import com.ddd.mooc.commands.ConsoleCommand;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.boot.WebApplicationType;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
- * {@link SpringBootApplication} = LOad all spring boot context and libraries.
- *                                  we also have to exclude the default spring boot hibernate configuration for avoid
- *                                  default custom behaviour and have custom configuration like
- *                                  {@link MoocHibernateConfiguration}.
- * {@link ComponentScan} = Allow the dependency injection , in the package and recognize the components of spring.
- *
- * With the ComponentScan you can make injection of this classes latter.
+ * This class allow us to get starter different applications by context and allow us execute
+ * custom commands in this applications, loading only the classes and context necessary for
+ * this application name.
  */
-@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
-@ComponentScan(
-        includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Service.class),
-        value = {"com.ddd.apps","com.ddd.mooc","com.ddd.backoffice"}
-)
 public class Starter {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(Starter.class, args);
+        if (args.length < 2) {
+            throw new RuntimeException("There are not enough arguments");
+        }
+
+        String applicationName = args[0];
+        String commandName = args[1];
+        boolean isApiCommand = commandName.equalsIgnoreCase("api");
+
+        ensureApplicationExist(applicationName);
+        ensureCommandExist(applicationName, commandName);
+
+        Class<?> applicationClass = applications().get(applicationName);
+        SpringApplication app = new SpringApplication(applicationClass);
+
+        /**
+         * If is not a api command we don't need the web application context of spring and should be a
+         * command
+         */
+        if (!isApiCommand) {
+            app.setWebApplicationType(WebApplicationType.NONE);
+            ConfigurableApplicationContext context = app.run(args);
+            ConsoleCommand consoleCommand = (ConsoleCommand) context.getBean(commands().get(applicationName).get(commandName));
+            consoleCommand.execute(Arrays.copyOfRange(args, 2, args.length));
+        }
+
     }
 
+    private static void ensureApplicationExist(String applicationName) {
 
-    @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext applicationContext) {
-        return args -> {
-              System.out.println("Inspect the beans ");
-              String[] beanNames = applicationContext.getBeanDefinitionNames();
-            Arrays.sort(beanNames);
-            for (String beanName :   beanNames) {
-                System.out.println("Inspect the bean = " + beanName);
-            }
-        };
+        if (!applications().containsKey(applicationName)) {
+            throw new RuntimeException(String.format(
+                    "The application <%s> doesn't exist. Valid applications : \n - %s",
+                    applicationName,
+                    String.join("\n-", applications().keySet())
+            ));
+        }
+
     }
+
+    private static void ensureCommandExist(String applicationName, String commandName) {
+
+        if (!"api".equals(commandName) && !existCommand(applicationName, commandName)) {
+            throw new RuntimeException(String.format(
+                    "Then command <%s> for the  application <%s> doesn't exist. Valid (application.command)) : \n - %s",
+                    commandName,
+                    String.join("\n-", commands().get(applicationName).keySet())
+            ));
+        }
+
+    }
+
+    private static Boolean existCommand(String applicationName, String commandName) {
+        HashMap<String, HashMap<String, Class<?>>> commands = commands();
+
+        return commands.containsKey(applicationName) && commands.get(applicationName).containsKey(commandName);
+    }
+
+    private static HashMap<String, Class<?>> applications() {
+        return new HashMap<>() {{
+            put("mooc_backend", MoocBackendApplication.class);
+        }};
+    }
+
+    private static HashMap<String, HashMap<String, Class<?>>> commands() {
+        return new HashMap<>() {{
+            put("mooc_backend", MoocBackendApplication.commands());
+        }};
+    }
+
 
 }
