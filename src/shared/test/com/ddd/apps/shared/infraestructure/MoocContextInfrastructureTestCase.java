@@ -1,6 +1,7 @@
 package com.ddd.apps.shared.infraestructure;
 
-import com.ddd.apps.Starter;
+import com.ddd.apps.MoocBackendApplication;
+import com.ddd.apps.shared.InfrastructureTestCase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -12,8 +13,11 @@ import org.springframework.test.context.ContextConfiguration;
  *
  * All integration test must to have to extend for it.
  *
+ * Use MoocBackendApplication as a context bc this contains the refenreces to the services classes in the spring boot context
+ * so you can inject it and  use it in your tests,
+ *
  */
-@ContextConfiguration(classes = Starter.class)
+@ContextConfiguration(classes = MoocBackendApplication.class)
 @SpringBootTest
-public abstract class InfrastructureTestCase {
+public abstract class MoocContextInfrastructureTestCase extends InfrastructureTestCase {
 }

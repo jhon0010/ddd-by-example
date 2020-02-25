@@ -26,13 +26,8 @@ public class InMemoryCourseRepository implements CourseRepository{
     }
 
     @Override
-    public Optional<Course> get(String id) {
-        return Optional.ofNullable(this.courses.get(new CourseId(id)));
-    }
-
-    @Override
-    public void delete(String id) {
-
+    public Optional<Course> get(CourseId id) {
+        return Optional.ofNullable(this.courses.get(id));
     }
 }
 

@@ -8,6 +8,5 @@ import java.util.Optional;
 public interface CourseRepository {
 
     void save(Course course);
-    Optional<Course> get(String id);
-    void delete(String id);
+    Optional<Course> get(CourseId id);
 }
