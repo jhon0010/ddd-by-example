@@ -1,5 +1,6 @@
 package com.ddd.apps.shared.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -7,7 +8,7 @@ import java.util.UUID;
  * Encapsulates the logic of generate ids, if you letter want
  * to change the UUID generator  the consumer of this change doesn't care
  */
-public abstract class Identifier {
+public abstract class Identifier implements Serializable {
 
     private String value;
 
